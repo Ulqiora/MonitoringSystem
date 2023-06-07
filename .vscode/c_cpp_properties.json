@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/model/AgentReportF"
             ],
             "defines": [],
             "macFrameworkPath": [

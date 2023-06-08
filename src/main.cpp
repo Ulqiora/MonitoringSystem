@@ -5,7 +5,17 @@
 using namespace std;
 
 int main() {
-    ReportComposite* report = new ReportComposite("Root",nullptr);
-    report->add(new ReportValue("Processor state",59,report));
-    report->add(new ReportValue("RAM",8096,report));
+    ReportComposite* firstNodeLevel = new ReportComposite("Root",nullptr);
+    ReportComposite* SecondNodeLevel = new ReportComposite("Root1",firstNodeLevel);
+    firstNodeLevel->add(SecondNodeLevel);
+    firstNodeLevel->add(new ReportValue("RAM",8096,firstNodeLevel));
+    SecondNodeLevel->add(new ReportValue("Processor state",59,SecondNodeLevel));
+    firstNodeLevel->add(new ReportValue("KUKU",59,firstNodeLevel));
+    ReportComposite::Iterator iter(firstNodeLevel);
+    iter.Next();
+    auto report_i = *(iter);
+    for(auto& point:report_i.first){
+        std::cout<<point<<std::endl;
+    }
+    std::cout<<report_i.second<<std::endl;
 }

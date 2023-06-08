@@ -1,9 +1,10 @@
 #pragma once
 #include "IAgent.h"
+
 class CpuMonitoring : public IAgent{
     public:
+    void update()override{
 
-    const AgentReport const* GetReport() const { return &IAgent::report_; }
-    void update();
-    
+    }
+    private:
 };

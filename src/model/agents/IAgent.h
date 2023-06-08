@@ -2,7 +2,8 @@
 #include <string>
 #include <string_view>
 #include <vector>
-#include "AgentReport.h"
+#include <
+#include "../../AgentReportF/ReportComponent.h"
 class IAgent {
    public:
     IAgent() {}
@@ -10,8 +11,8 @@ class IAgent {
     IAgent(IAgent&&) = delete;
     IAgent& operator=(const IAgent&) = delete;
     IAgent& operator=(const IAgent&) = delete;
-    const AgentReport const* GetReport() const { return &report_; }
+    const ReportComponent const* GetReport() const { return report_; }
     virtual void update() = 0;
    private:
-    AgentReport report_;
+    ReportComponent* report_;
 };

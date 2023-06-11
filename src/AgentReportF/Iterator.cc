@@ -26,7 +26,7 @@ void ReportComposite::Iterator::Next() {
 
 
 
-std::pair<std::list<std::string_view>, double> ReportComposite::Iterator::operator*() {
+std::pair<std::list<std::string_view>, MetricParameters> ReportComposite::Iterator::operator*() {
     std::list<std::string_view> output;
     auto temp = *cursor_;
     while (temp->getParent() != nullptr) {

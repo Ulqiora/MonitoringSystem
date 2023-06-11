@@ -1,11 +1,12 @@
 #pragma once
 #include <assert.h>
-
 #include <algorithm>
 #include <iostream>
 #include <list>
 #include <string>
 #include <vector>
+
+#include "MetricParameters.h"
 
 class ReportComponent {
  public:
@@ -35,11 +36,11 @@ class ReportComponent {
 
 class ReportValue : public ReportComponent {
  public:
-    ReportValue(const std::string& nameMetric, double value, ReportComponent* parent)
-        : ReportComponent(nameMetric, parent), value_(value) {}
+    ReportValue(const std::string& nameMetric, const MetricParameters& value, ReportComponent* parent)
+        : ReportComponent(nameMetric, parent), info_(value) {}
 
-    double GetValue() { return value_; }
-    void updateValue(double value) { value_ = value; }
+    MetricParameters GetValue() { return info_; }
+    void updateValue(double value) { info_.setValue(value); }
 
     virtual ~ReportValue() = default;
 
@@ -50,7 +51,7 @@ class ReportValue : public ReportComponent {
     virtual std::vector<ReportComponent*>::iterator begin() override;
 
  private:
-    double value_;
+    MetricParameters info_;
 };
 
 class ReportComposite : public ReportComponent {
@@ -62,7 +63,7 @@ class ReportComposite : public ReportComponent {
         void Next();
         bool isEnd() { return cursor_ == root_->end(); }
         ReportComponent* end() { return nullptr; }
-        std::pair<std::list<std::string_view>, double> operator*();
+        std::pair<std::list<std::string_view>, MetricParameters> operator*();
 
      private:
         void cursorDropDown();

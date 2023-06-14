@@ -3,7 +3,7 @@
 
 class CpuMonitoring : public IAgent{
     public:
-    
+    CpuMonitoring
     void update()override{
 
     }

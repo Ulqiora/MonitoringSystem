@@ -4,13 +4,13 @@ void Builder::byJson(json filejson){
     temp_=new ReportComposite("title",nullptr);
     for(auto& item: filejson.items()){
         if(item.value().is_primitive()){
-            if(item.value()=="name"){
+            if(item.key()=="name"){
                 name_=item.value();
-            } else if (item.value() == "type") {
+            } else if (item.key() == "type") {
                 typeAgent_ = item.value();
-            } else if (item.value() == "interval") {
+            } else if (item.key() == "interval") {
                 time_seconds_ = item.value();
-            } else if (item.value() == "enabled") {
+            } else if (item.key() == "enabled") {
                 enabled_ = item.value();
             }
         } else {

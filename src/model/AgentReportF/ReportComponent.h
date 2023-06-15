@@ -39,7 +39,7 @@ class ReportValue : public ReportComponent {
     ReportValue(const std::string& nameMetric, const MetricParameters& value, ReportComponent* parent)
         : ReportComponent(nameMetric, parent), info_(value) {}
 
-    MetricParameters GetValue() { return info_; }
+    MetricParameters& GetValue() { return info_; }
     void updateValue(double value) { info_.setValue(value); }
 
     virtual ~ReportValue() = default;
@@ -59,11 +59,12 @@ class ReportComposite : public ReportComponent {
     class Iterator {
      public:
         Iterator(ReportComponent* root);
+        Iterator(const Iterator& other);
         void First();
         void Next();
         bool isEnd() { return cursor_ == root_->end(); }
         ReportComponent* end() { return nullptr; }
-        std::pair<std::list<std::string_view>, MetricParameters> operator*();
+        std::pair<std::list<std::string_view>, MetricParameters&> operator*();
 
      private:
         void cursorDropDown();

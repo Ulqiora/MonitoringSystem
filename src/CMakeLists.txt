@@ -23,7 +23,13 @@ execute_process(
 add_subdirectory(libs/json)
 list(APPEND EXTRA_LIBS nlohmann_json)
 target_link_libraries(main PRIVATE ${EXTRA_LIBS})
+
 add_subdirectory(model/AgentReportF)
 list(APPEND EXTRA_LIBS TreeStructure)
+
+target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+
+add_subdirectory(model/Agents/CPU)
+list(APPEND EXTRA_LIBS AgentCPU)
 
 target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)

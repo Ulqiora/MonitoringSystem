@@ -12,11 +12,10 @@ int main() {
     IBuilder* bd = new Builder(path);
     std::cout << "Result compare = "<< MetricParametersConstants::mapOperationCompare[">="](0,5) << std::endl;
     auto firstNodeLevel  = bd->getResult();
-    std::cout<<"Agent name : "<<bd->getName()<<'\n';
-    std::cout<<"Agent type : "<<bd->getType()<<'\n';
-    std::cout<<"Agent interval : "<<bd->getTime()<<'\n';
-    std::cout<<"Agent enabled : "<<bd->isEnabled()<<'\n';
-    
+    std::cout<<"Agent name : "<<bd->getAgentInfo().name_<<'\n';
+    std::cout<<"Agent type : "<<bd->getAgentInfo().typeAgent_<<'\n';
+    std::cout<<"Agent interval : "<<bd->getAgentInfo().time_seconds_<<'\n';
+    std::cout<<"Agent enabled : "<<bd->getAgentInfo().enabled_<<'\n';
     for (ReportComposite::Iterator iter(firstNodeLevel); !iter.isEnd(); iter.Next()) {
         auto report_i = (*iter);
         for (auto& point : report_i.first) {

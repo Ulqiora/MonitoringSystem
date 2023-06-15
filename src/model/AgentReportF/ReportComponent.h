@@ -73,13 +73,15 @@ class ReportComposite : public ReportComponent {
     ReportComposite(std::string namecomponent, ReportComponent* parent);
     size_t Size();
     void add(ReportComponent* component);
-    virtual ~ReportComposite() = default;
 
  public:
     bool empty() override { return components_.empty(); }
     virtual bool isLeaf() override { return false; }
     std::vector<ReportComponent*>::iterator end() override { return components_.end(); }
     std::vector<ReportComponent*>::iterator begin() override { return components_.begin(); }
+    ~ReportComposite() {
+        for (auto& i : components_) delete i;
+    }
 
  private:
     std::vector<ReportComponent*> components_;

@@ -1,11 +1,13 @@
 #pragma once
-#include "IAgent.h"
+#include "../IAgent.h"
 
 class CpuMonitoring : public IAgent{
     public:
-    CpuMonitoring
+    // CpuMonitoring
     void update()override{
 
     }
     private:
+    ReportComponent* report_;
+
 };

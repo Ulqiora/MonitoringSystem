@@ -93,7 +93,8 @@
         "span": "cpp",
         "stack": "cpp",
         "unordered_set": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "filesystem": "cpp"
     },
     "cmake.sourceDirectory": "/Users/jcraster/MonitoringSystem/src"
 }

@@ -11,6 +11,8 @@ class CpuAgent : public IAgent {
     void update() override final;
     const InfoAgent& GetInfoAboutAgent() override final;
  private:
+   	void getCpuLoaded();
+	void getNumProc();
     InfoAgent info_;
     ReportComponent* report_;
     ReportComposite::Iterator iter_;

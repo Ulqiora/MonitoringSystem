@@ -10,8 +10,6 @@
 CpuAgent::CpuAgent(IBuilder* bd)
     :   info_(bd->getAgentInfo()),
         report_(bd->getResult()), iter_(report_) {
-    info_ = bd->getAgentInfo();
-    report_ = bd->getResult();
     update();
 }
 

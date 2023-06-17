@@ -33,3 +33,5 @@ execute_process(
 # list(APPEND EXTRA_LIBS AgentCPU)
 
 # target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+target_link_libraries(main atasmart)
+target_link_libraries(main atasmart)

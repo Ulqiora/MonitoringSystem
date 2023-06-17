@@ -46,24 +46,22 @@ void MemoryAgent::setHardVolume(){
 }
 
 void MemoryAgent::setHardOps(){
-    FILE *diskstats = fopen("/proc/diskstats", "r");
-    char line[1024];
-    int major = 0, minor = 0;
-    char device[256] = {0};
-    unsigned int reads = 0, writes = 0;
-    while (fgets(line, sizeof(line), diskstats)) {
-        sscanf(line, "%d %d %s %u %*u %u %*u %*u %*u %*u %*u %*u %*u %*u %u", 
-        &major, &minor, device, &reads, &writes);
-        if (strstr(device, "/dev/") == device) {
-            (*iter_).second.setValue(reads + writes), iter_.Next();
-            break;
-        }
+    std::ifstream diskstats("/proc/diskstats");
+    std::string line;
+    int maxIO=0;
+    std::getline(diskstats, line);
+    while (std::getline(diskstats, line)) {
+        long long reads, writes;
+        sscanf(line.c_str(), "   8   0 %*s %lld %*d %lld", &reads, &writes);
+        if(reads+writes>maxIO) maxIO = reads+writes;
+        std::cout << "Reads: " << reads << " Writes: " << writes << std::endl;
     }
-    fclose(diskstats);
+    diskstats.close();
+    (*iter_).second.setValue(maxIO), iter_.Next();
 }
 
 void MemoryAgent::setHardThroughput(){
-
+    
 }
 
 ReportComposite::Iterator MemoryAgent::GetReport() { return ReportComposite::Iterator(iter_); }

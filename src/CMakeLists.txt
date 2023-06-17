@@ -20,18 +20,20 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 execute_process(
     COMMAND git clone "https://github.com/nlohmann/json" json
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/libs)
-# add_subdirectory(libs/json)
-# list(APPEND EXTRA_LIBS nlohmann_json)
-# target_link_libraries(main PRIVATE ${EXTRA_LIBS})
+add_subdirectory(libs/json)
+list(APPEND EXTRA_LIBS nlohmann_json)
+target_link_libraries(main PRIVATE ${EXTRA_LIBS})
 
-# add_subdirectory(model/AgentReportF)
-# list(APPEND EXTRA_LIBS TreeStructure)
+add_subdirectory(model/AgentReportF)
+list(APPEND EXTRA_LIBS TreeStructure)
 
-# target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
 
-# add_subdirectory(model/Agents/CPU)
-# list(APPEND EXTRA_LIBS AgentCPU)
+add_subdirectory(model/Agents/CPU)
+list(APPEND EXTRA_LIBS AgentCPU)
 
-# target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
-target_link_libraries(main atasmart)
-target_link_libraries(main atasmart)
+target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+add_subdirectory(model/Agents/Memory)
+list(APPEND EXTRA_LIBS AgentMemory)
+
+target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)

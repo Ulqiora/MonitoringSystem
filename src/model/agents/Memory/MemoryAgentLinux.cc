@@ -19,7 +19,6 @@ void MemoryAgent::setRamTotal() {
     struct sysinfo si;
     if (sysinfo(&si) == 0) {
         (*iter_).second.setValue(si.totalram / 1024 / 1024), iter_.Next();
-        // cout << "Total RAM: " << si.totalram / 1024 / 1024 << " MB" << endl;
     }
 }
 
@@ -27,9 +26,7 @@ void MemoryAgent::setRamPercent() {
     struct sysinfo si;
     if (sysinfo(&si) == 0) {
         double used_mem = si.totalram - si.freeram;
-        // double mem_percent = used_mem / si.totalram * 100.0;
         (*iter_).second.setValue(used_mem / si.totalram * 100.0), iter_.Next();
-        // cout << "Memory usage: " << mem_percent << "%" << endl;
     }
 }
 
@@ -39,9 +36,6 @@ void MemoryAgent::setHardVolume(){
         unsigned long long totalSize = fiData.f_frsize * fiData.f_blocks;
         unsigned long long freeSpace = fiData.f_bfree * fiData.f_frsize;
         (*iter_).second.setValue(100.0 - ((double)fiData.f_bfree / (double)fiData.f_blocks) * 100.0), iter_.Next();
-        // cout << "Total disk space: " << totalSize / (1024 * 1024) << " MB" << endl;
-        // cout << "Free disk space: " << freeSpace / (1024 * 1024) << " MB" << endl;
-        // cout << "Used disk space: " << usedSpacePercent << "%" << endl;
     }
 }
 

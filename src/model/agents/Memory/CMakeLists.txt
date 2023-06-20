@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.22.1)
-project(AgentMemory VERSION 1.0 LANGUAGES CXX)
+project(MemoryAgent VERSION 1.0 LANGUAGES CXX)
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(SOURCE_LIB_MEMORY MemoryAgentMacOS.cc)
+if(UNIX AND NOT APPLE)
+set(SOURCE_LIB_MEMORY MemoryAgentLinux.cc)
 else()
-    set(SOURCE_LIB_MEMORY MemoryAgentLinux.cc)
+set(SOURCE_LIB_MEMORY MemoryAgentMacOS.cc)
 endif()
 add_library(${PROJECT_NAME} STATIC ${SOURCE_LIB_MEMORY})
 target_include_directories(${PROJECT_NAME}

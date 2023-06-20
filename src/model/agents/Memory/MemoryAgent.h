@@ -7,9 +7,11 @@ class IBuilder;
 class MemoryAgent : public IAgent {
  public:
     MemoryAgent(IBuilder* bd);
-    ReportComposite::Iterator GetReport() override final;
     void update() override final;
-    const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] bool SetUrl(std::string_view) override final;
+    [[nodiscard]] ReportComposite::Iterator GetReport() override final;
+    [[nodiscard]] const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] std::string toStdString() override final;
 
  private:
     void setRamTotal();

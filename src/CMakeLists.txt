@@ -26,14 +26,14 @@ target_link_libraries(main PRIVATE ${EXTRA_LIBS})
 
 add_subdirectory(model/AgentReportF)
 list(APPEND EXTRA_LIBS TreeStructure)
-
 target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+
 
 add_subdirectory(model/Agents/CPU)
-list(APPEND EXTRA_LIBS AgentCPU)
-
+list(APPEND EXTRA_LIBS CpuAgent)
 target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
-add_subdirectory(model/Agents/Memory)
-list(APPEND EXTRA_LIBS AgentMemory)
 
+
+add_subdirectory(model/Agents/Memory)
+list(APPEND EXTRA_LIBS MemoryAgent)
 target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)

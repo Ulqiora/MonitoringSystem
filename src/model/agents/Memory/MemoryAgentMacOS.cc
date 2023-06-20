@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 #include "../../AgentReportF/Builder.h"
 #include "MemoryAgent.h"
@@ -93,3 +94,19 @@ void MemoryAgent::setHardThroughput() {
 ReportComposite::Iterator MemoryAgent::GetReport() { return ReportComposite::Iterator(iter_); }
 
 const InfoAgent& MemoryAgent::GetInfoAboutAgent() { return info_; }
+
+std::string MemoryAgent::toStdString() {
+    std::stringstream ss;
+    auto time = std::chrono::system_clock::now();
+    std::time_t time_s = std::chrono::system_clock::to_time_t(time);
+    ss<<std::put_time(localtime(&time_s),"%Y:%m:%d, %a.   ");
+    ss<<info_.name_<<" : ";
+    ReportComposite::Iterator iter(iter_);
+    for (iter.First(); !iter.isEnd(); iter.Next()) {
+        for (auto str_v : (*iter).first) ss << str_v << ' ';
+        ss << "=" << std::setw(10) << std::left << (*iter).second.getValue()<<"; ";
+    }
+    return ss.str();
+}
+
+bool MemoryAgent::SetUrl(std::string_view) { return false; }

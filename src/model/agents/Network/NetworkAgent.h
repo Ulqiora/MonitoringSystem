@@ -7,10 +7,16 @@ class IBuilder;
 class NetworkAgent: public IAgent{
  public:
     NetworkAgent(IBuilder* bd);
-    ReportComposite::Iterator GetReport() override final;
     void update() override final;
-    const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] bool SetUrl(std::string_view) override final;
+    [[nodiscard]] ReportComposite::Iterator GetReport() override final;
+    [[nodiscard]] const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] std::string toStdString() override final;
+
  private:
+    void checkUrl();
+
+    std::string URL_;
     InfoAgent info_;
     ReportComponent* report_;
     ReportComposite::Iterator iter_;

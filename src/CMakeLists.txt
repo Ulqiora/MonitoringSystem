@@ -37,3 +37,7 @@ target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
 add_subdirectory(model/Agents/Memory)
 list(APPEND EXTRA_LIBS MemoryAgent)
 target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+
+add_subdirectory(model/Agents/Network)
+list(APPEND EXTRA_LIBS NetworkAgent)
+target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)

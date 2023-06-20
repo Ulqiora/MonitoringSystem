@@ -26,7 +26,7 @@ class MetricParameters {
     bool compareIsTrue() { return type_(critical_value_, value_); }
 
    private:
-    double value_;
-    double critical_value_;
+    double value_ = 0.0;
+    double critical_value_ = 0.0;
     std::function<bool(double, double)> type_;
 };

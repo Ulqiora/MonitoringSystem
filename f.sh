@@ -28,3 +28,7 @@ WRITES=$(echo $IO_STATS | cut -d',' -f2)
 echo "$READS"
 echo "$WRITES"
 echo "scale=2; (${READS}+${WRITES})" | bc
+"Name       Mtu   Network       Address            Ipkts Ierrs    Opkts Oerrs  Coll\n
+en0   1500  <Link#7>    3c:7d:0a:0e:f1:66 424529293     0 355299043     0     0\n
+en0   1500  ex-g5.local fe80:7::18a1:1584 424529293     - 355299043     -     -\n
+en0   1500  10.54.201/24  10.54.201.59    424529293     - 355299043     -     -\n"

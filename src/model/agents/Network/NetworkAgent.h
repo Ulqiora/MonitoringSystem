@@ -15,7 +15,8 @@ class NetworkAgent: public IAgent{
 
  private:
     void checkUrl();
-
+    void getSpeedNetInterface();
+   
     std::string URL_;
     InfoAgent info_;
     ReportComponent* report_;

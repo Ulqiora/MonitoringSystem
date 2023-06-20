@@ -6,12 +6,12 @@
         {
             "name": "URL",
             "comparison": "==",
-            "critical_value": "0"
+            "critical_value": 0
         },
         {
             "name": "inet_throughput",
             "comparison": ">=",
-            "critical_value": "1000"
+            "critical_value": 1000
         }
     ],
     "interval": 60

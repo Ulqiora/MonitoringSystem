@@ -46,6 +46,7 @@ ReportComposite::Iterator CpuAgent::GetReport() { return ReportComposite::Iterat
 const InfoAgent& CpuAgent::GetInfoAboutAgent() { return info_; }
 
 std::string CpuAgent::toStdString() {
+    iter_.First();
     std::stringstream ss;
     auto time = std::chrono::system_clock::now();
     std::time_t time_s = std::chrono::system_clock::to_time_t(time);

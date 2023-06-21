@@ -11,7 +11,6 @@ class CpuAgent : public IAgent {
     CpuAgent(IBuilder* bd);
     void update() override final;
     [[nodiscard]] std::string toStdString() override final;
-    [[nodiscard]] bool setPrivilege(Privilege) override final;
     [[nodiscard]] bool SetUrl(std::string_view) override final;
     [[nodiscard]] const InfoAgent& GetInfoAboutAgent() override final;
     [[nodiscard]] ReportComposite::Iterator GetReport() override final;

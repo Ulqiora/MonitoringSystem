@@ -110,5 +110,3 @@ std::string MemoryAgent::toStdString() {
 }
 
 bool MemoryAgent::SetUrl(std::string_view) { return false; }
-
-bool setPrivilege(Privilege privilege) { return false; }

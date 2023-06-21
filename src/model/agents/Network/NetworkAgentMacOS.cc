@@ -110,5 +110,3 @@ void NetworkAgent::checkUrl() {
         (*iter_).second.setValue(0.0), iter_.Next();
     }
 }
-
-bool setPrivilege(Privilege privilege) { return false; }

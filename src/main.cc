@@ -13,16 +13,17 @@
 #include "model/KernelLoader/KernelLoader.h"
 #include "model/Agents/Memory/MemoryAgent.h"
 #include "model/Agents/Network/NetworkAgent.h"
+#include "model/Agents/System/SystemAgent.h"
 // using json = nlohmann::json;
 int main() {
-    fs::path path = fs::current_path()/"logs"/"NetworkAgent.json";
+    fs::path path = fs::current_path()/"logs"/"SystemAgent.json";
     IBuilder* bd = new Builder(path);
-    IAgent* agent = new NetworkAgent(bd);
-    agent->SetUrl("help.iwantmyname.com");
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    IAgent* agent = new SystemAgent(bd);
+    // agent->SetUrl("help.iwantmyname.com");
     agent->update();
     std::cout<<agent->toStdString()<<'\n';
-    agent->SetUrl("help.iwantmynae.com");
+    // agent->SetUrl("help.iwantmynae.com");
+    std::this_thread::sleep_for(std::chrono::seconds(30));
     agent->update();
     std::cout<<agent->toStdString()<<'\n';
 

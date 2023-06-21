@@ -10,10 +10,11 @@ class CpuAgent : public IAgent {
  public:
     CpuAgent(IBuilder* bd);
     void update() override final;
-    bool SetUrl(std::string_view) override final;
-    [[nodiscard]] ReportComposite::Iterator GetReport() override final;
-    const InfoAgent& GetInfoAboutAgent() override final;
     [[nodiscard]] std::string toStdString() override final;
+    [[nodiscard]] bool setPrivilege(Privilege) override final;
+    [[nodiscard]] bool SetUrl(std::string_view) override final;
+    [[nodiscard]] const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] ReportComposite::Iterator GetReport() override final;
  private:
    	void getCpuLoaded();
 	void getNumProc();

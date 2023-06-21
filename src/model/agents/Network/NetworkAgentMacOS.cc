@@ -11,7 +11,7 @@
 NetworkAgent::NetworkAgent(IBuilder* bd)
     : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
     iter_.First();
-    update();
+    // update();
 }
 
 void NetworkAgent::update() {
@@ -20,37 +20,28 @@ void NetworkAgent::update() {
     getSpeedNetInterface();
 }
 void NetworkAgent::getSpeedNetInterface() {
-    std::string cmd = "netstat -I en0";
+    std::string cmd = "netstat -I en0 | awk 'NR==2{print ($7+$10)}'";
     FILE* stream = popen(cmd.c_str(), "r");
+    const int max_line = 255;
+    char buffer[max_line];
+    int ibytes1 = 0;
     if (stream) {
-        const int max_line = 255;
-        char buffer[max_line];
-        int ibytes1, opkts1;
-        while (!feof(stream)) {
-            if (fgets(buffer, max_line, stream) != NULL) {
-                if (sscanf(buffer, "%s %d %*d %*d %*d %d %*d %*d %*d", buffer, &ibytes1, &opkts1) == 3) {
-                    break;
-                }
-            }
+        if (!feof(stream) && fgets(buffer, max_line, stream) != NULL) {
+            sscanf(buffer, "%d", &ibytes1);
         }
         pclose(stream);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        stream = popen(cmd.c_str(), "r");
-        if (stream) {
-            int ibytes2, opkts2;
-            while (!feof(stream)) {
-                if (fgets(buffer, max_line, stream) != NULL) {
-                    if (sscanf(buffer, "%s %d %*d %*d %*d %d %*d %*d %*d", buffer, &ibytes2, &opkts2) == 3) {
-                        break;
-                    }
-                }
-            }
-            pclose(stream);
-            (*iter_).second.setValue(fabs(((double)ibytes2 - ibytes1)/(1024.0*1024.0)));
-        } else {
-            std::cerr << "Ошибка выполнения команды " << cmd << std::endl;
-            exit(1);
+    } else {
+        std::cerr << "Ошибка выполнения команды " << cmd << std::endl;
+        exit(1);
+    }
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    if (stream = popen(cmd.c_str(), "r"); stream) {
+        int ibytes2 = 0, size_packet = 0;
+        if (!feof(stream) && fgets(buffer, max_line, stream) != NULL) {
+            sscanf(buffer, "%d", &ibytes2);
         }
+        pclose(stream);
+        (*iter_).second.setValue(fabs(((double)ibytes2 + ibytes1)/2 / std::pow(2,20)));
     } else {
         std::cerr << "Ошибка выполнения команды " << cmd << std::endl;
         exit(1);
@@ -90,19 +81,8 @@ void NetworkAgent::getSpeedNetInterface() {
 }
 
 void NetworkAgent::checkUrl() {
-    // if(URL_.empty()) return ;
-    // std::string command = "curl -I " + URL_ + " -o /dev/null -s -w '%{http_code}\n'";
-    // std::string output = "";
-    // char buffer[128];
-    // std::FILE* pipe = popen(command.c_str(), "r");
-    // if (!pipe) {
-    //     throw std::runtime_error("popen() failed!");
-    // }
-    // while (!std::feof(pipe)) {
-    //     if (std::fgets(buffer, 128, pipe) != NULL) output += buffer;
-    // }
-    // pclose(pipe);
     if (URL_.empty()) {
+        // (*iter_).second.setValue(0.0);
         iter_.Next();
         return;
     }
@@ -130,3 +110,5 @@ void NetworkAgent::checkUrl() {
         (*iter_).second.setValue(0.0), iter_.Next();
     }
 }
+
+bool setPrivilege(Privilege privilege) { return false; }

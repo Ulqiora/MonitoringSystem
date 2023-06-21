@@ -22,6 +22,7 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     agent->update();
     std::cout<<agent->toStdString()<<'\n';
+    agent->SetUrl("help.iwantmynae.com");
     agent->update();
     std::cout<<agent->toStdString()<<'\n';
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
 #include "../AgentReportF/ReportComponent.h"
+#include "Privilege.h"
 struct InfoAgent;
 class IAgent {
  public:
@@ -11,8 +12,9 @@ class IAgent {
     IAgent& operator=(IAgent&&) = delete;
 
     virtual void update() = 0;
-    virtual ReportComposite::Iterator GetReport() = 0;
-    virtual const InfoAgent& GetInfoAboutAgent() = 0;
-    virtual std::string toStdString() = 0;
-    virtual bool SetUrl(std::string_view) = 0;
+    [[nodiscard]] virtual std::string toStdString() = 0;
+    [[nodiscard]] virtual bool setPrivilege(Privilege) = 0;
+    [[nodiscard]] virtual bool SetUrl(std::string_view) = 0;
+    [[nodiscard]] virtual const InfoAgent& GetInfoAboutAgent() = 0;
+    [[nodiscard]] virtual ReportComposite::Iterator GetReport() = 0;
 };

@@ -7,11 +7,15 @@ class IBuilder;
 class SystemAgent: public IAgent{
  public:
     SystemAgent(IBuilder* bd);
-    ReportComposite::Iterator GetReport() override final;
     void update() override final;
-    const InfoAgent& GetInfoAboutAgent() override final;
+    [[nodiscard]] std::string toStdString() override final;
+    [[nodiscard]] bool setPrivilege(Privilege) override final;
+    [[nodiscard]] bool SetUrl(std::string_view) override final;
+    [[nodiscard]] ReportComposite::Iterator GetReport() override final;
+    [[nodiscard]] const InfoAgent& GetInfoAboutAgent() override final;
  private:
     InfoAgent info_;
     ReportComponent* report_;
     ReportComposite::Iterator iter_;
+    Privilege priv_;
 };

@@ -61,3 +61,5 @@ std::string CpuAgent::toStdString() {
 }
 
 bool CpuAgent::SetUrl(std::string_view) { return false; }
+
+bool setPrivilege(Privilege privilege) { return false; }

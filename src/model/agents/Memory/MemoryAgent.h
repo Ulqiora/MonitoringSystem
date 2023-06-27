@@ -3,10 +3,10 @@
 #include "../IAgent.h"
 #include "../InfoAgent.h"
 
-class IBuilder;
+class ISerializer;
 class MemoryAgent : public IAgent {
  public:
-    MemoryAgent(IBuilder* bd);
+    MemoryAgent(ISerializer* bd);
     void update() override final;
     [[nodiscard]] std::string toStdString() override final;
     [[nodiscard]] bool SetUrl(std::string_view) override final;

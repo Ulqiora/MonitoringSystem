@@ -5,10 +5,10 @@
 #include <string>
 #include <thread>
 
-#include "../../AgentReportF/Builder.h"
+#include "../../AgentReportF/Serializer.h"
 #include "SystemAgent.h"
 
-SystemAgent::SystemAgent(IBuilder* bd)
+SystemAgent::SystemAgent(ISerializer* bd)
     : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {}
 
 void SystemAgent::update() {

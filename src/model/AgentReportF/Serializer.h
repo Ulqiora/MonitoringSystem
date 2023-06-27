@@ -3,20 +3,21 @@
 #include <fstream>
 #include "../Agents/InfoAgent.h"
 #include "../../libs/json/single_include/nlohmann/json.hpp"
+#include "ReportComponent.h"
 using json = nlohmann::json;
 class ReportComponent;
 class ReportComposite;
 namespace fs = std::filesystem;
-class IBuilder {
+class ISerializer {
  public:
     virtual ReportComponent* getResult() = 0;
     virtual const InfoAgent& getAgentInfo() = 0; 
  private:
     virtual void byJson(json&& filejson) = 0;
 };
-class Builder : public IBuilder {
+class Serializer : public ISerializer {
  public:
-    Builder(fs::path path);
+    Serializer(fs::path path);
     ReportComponent* getResult() override final { return (ReportComponent*)temp_; }
     const InfoAgent& getAgentInfo() override final { return info_;}
 

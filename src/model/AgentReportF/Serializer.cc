@@ -1,14 +1,13 @@
-#include "Builder.h"
+#include "Serializer.h"
 
-#include "ReportComponent.h"
-
-Builder::Builder(fs::path path) {
+Serializer::Serializer(fs::path path) {
     std::ifstream file(path);
     if (!file.is_open()) throw std::invalid_argument("Incorrect file!");
     json filejson = json::parse(file);
     byJson(std::move(filejson));
 }
-void Builder::byJson(json&& filejson) {
+
+void Serializer::byJson(json&& filejson) {
     temp_ = new ReportComposite("title", nullptr);
     for (auto& item : filejson.items()) {
         if (item.value().is_primitive()) {
@@ -27,7 +26,7 @@ void Builder::byJson(json&& filejson) {
     }
 }
 
-void Builder::byJson(json&& filejson, ReportComposite* curNode) {
+void Serializer::byJson(json&& filejson, ReportComposite* curNode) {
     std::list<ReportComponent*> currentNodes;
     if (filejson.is_array()) {
         for (auto& item : filejson.items()) {

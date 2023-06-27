@@ -1,10 +1,10 @@
 #include "MemoryAgent.h"
-#include "../../AgentReportF/Builder.h"
+#include "../../AgentReportF/Serializer.h"
 #include <sys/sysinfo.h>
 #include <sys/statvfs.h>
 
 
-MemoryAgent::MemoryAgent(IBuilder* bd)
+MemoryAgent::MemoryAgent(ISerializer* bd)
     : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
     update();
 }

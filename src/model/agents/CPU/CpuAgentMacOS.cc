@@ -5,9 +5,9 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "../../AgentReportF/Builder.h"
+#include "../../AgentReportF/Serializer.h"
 
-CpuAgent::CpuAgent(IBuilder* bd) : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
+CpuAgent::CpuAgent(ISerializer* bd) : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
     update();
 }
 

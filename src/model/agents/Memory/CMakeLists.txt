@@ -6,7 +6,7 @@ set(SOURCE_LIB_MEMORY MemoryAgentLinux.cc)
 else()
 set(SOURCE_LIB_MEMORY MemoryAgentMacOS.cc)
 endif()
-add_library(${PROJECT_NAME} STATIC ${SOURCE_LIB_MEMORY})
+add_library(${PROJECT_NAME} MODULE ${SOURCE_LIB_MEMORY})
 target_include_directories(${PROJECT_NAME}
           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
           )

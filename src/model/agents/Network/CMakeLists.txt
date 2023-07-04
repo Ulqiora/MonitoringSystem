@@ -6,7 +6,7 @@ set(SOURCE_LIB_NETWORK NetworkAgentLinux.cc)
 else()
 set(SOURCE_LIB_NETWORK NetworkAgentMacOS.cc)
 endif()
-add_library(${PROJECT_NAME} STATIC ${SOURCE_LIB_NETWORK})
+add_library(${PROJECT_NAME} MODULE ${SOURCE_LIB_NETWORK})
 target_include_directories(${PROJECT_NAME}
           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
           )

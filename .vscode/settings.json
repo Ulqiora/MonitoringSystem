@@ -96,5 +96,5 @@
         "valarray": "cpp",
         "filesystem": "cpp"
     },
-    "cmake.sourceDirectory": "/Users/jcraster/MonitoringSystem/src"
+    "cmake.sourceDirectory": "D:/GitHub/MonitoringSystem/src"
 }

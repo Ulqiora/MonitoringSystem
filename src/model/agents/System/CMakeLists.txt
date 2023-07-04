@@ -6,7 +6,7 @@ set(SOURCE_LIB_SYSTEM SystemAgentLinux.cc)
 else()
 set(SOURCE_LIB_SYSTEM SystemAgentMacOS.cc)
 endif()
-add_library(${PROJECT_NAME} STATIC ${SOURCE_LIB_SYSTEM})
+add_library(${PROJECT_NAME} MODULE ${SOURCE_LIB_SYSTEM})
 target_include_directories(${PROJECT_NAME}
           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
           )

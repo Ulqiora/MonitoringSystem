@@ -6,7 +6,7 @@ set(SOURCE_LIB_CPU CpuAgentLinux.cc)
 else()
 set(SOURCE_LIB_CPU CpuAgentMacOS.cc)
 endif()
-add_library(${PROJECT_NAME} STATIC ${SOURCE_LIB_CPU})
+add_library(${PROJECT_NAME} MODULE ${SOURCE_LIB_CPU})
 target_include_directories(${PROJECT_NAME}
           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
           )

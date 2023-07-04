@@ -9,23 +9,23 @@
 #include "libs/json/single_include/nlohmann/json.hpp"
 #include "model/AgentReportF/Builder.h"
 #include "model/AgentReportF/ReportComponent.h"
-#include "model/Agents/CPU/CpuAgent.h"
-#include "model/KernelLoader/KernelLoader.h"
-#include "model/Agents/Memory/MemoryAgent.h"
-#include "model/Agents/Network/NetworkAgent.h"
-#include "model/Agents/System/SystemAgent.h"
+// #include "model/Agents/CPU/CpuAgent.h"
+// #include "model/KernelLoader/KernelLoader.h"
+// #include "model/Agents/Memory/MemoryAgent.h"
+// #include "model/Agents/Network/NetworkAgent.h"
+// #include "model/Agents/System/SystemAgent.h"
 // using json = nlohmann::json;
 int main() {
     fs::path path = fs::current_path()/"logs"/"SystemAgent.json";
     IBuilder* bd = new Builder(path);
-    IAgent* agent = new SystemAgent(bd);
-    // agent->SetUrl("help.iwantmyname.com");
-    agent->update();
-    std::cout<<agent->toStdString()<<'\n';
-    // agent->SetUrl("help.iwantmynae.com");
-    std::this_thread::sleep_for(std::chrono::seconds(30));
-    agent->update();
-    std::cout<<agent->toStdString()<<'\n';
+    // IAgent* agent = new SystemAgent(bd);
+    // // agent->SetUrl("help.iwantmyname.com");
+    // agent->update();
+    // std::cout<<agent->toStdString()<<'\n';
+    // // agent->SetUrl("help.iwantmynae.com");
+    // std::this_thread::sleep_for(std::chrono::seconds(30));
+    // agent->update();
+    // std::cout<<agent->toStdString()<<'\n';
 
     // std::string command = "ping -c 1 " "help.iwantmyname.com"  " >/dev/null";
     // std::string output = "";

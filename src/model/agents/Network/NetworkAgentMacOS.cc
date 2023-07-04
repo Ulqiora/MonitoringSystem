@@ -6,9 +6,9 @@
 #include <thread>
 #include <chrono>
 
-#include "../../AgentReportF/Builder.h"
+#include "../../AgentReportF/Serializer.h"
 
-NetworkAgent::NetworkAgent(IBuilder* bd)
+NetworkAgent::NetworkAgent(ISerializer* bd)
     : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
     iter_.First();
     // update();

@@ -3,12 +3,12 @@
 #include "../InfoAgent.h"
 #include <sstream>
 #include <iomanip>
-class IBuilder;
+class ISerializer;
 struct InfoAgent;
 
 class CpuAgent : public IAgent {
  public:
-    CpuAgent(IBuilder* bd);
+    CpuAgent(ISerializer* bd);
     void update() override final;
     [[nodiscard]] std::string toStdString() override final;
     [[nodiscard]] bool SetUrl(std::string_view) override final;

@@ -7,7 +7,7 @@
 // #include <filesystem>
 // #include <sys/vfs.h>
 #include "libs/json/single_include/nlohmann/json.hpp"
-#include "model/AgentReportF/Builder.h"
+#include "model/AgentReportF/Serializer.h"
 #include "model/AgentReportF/ReportComponent.h"
 // #include "model/Agents/CPU/CpuAgent.h"
 // #include "model/KernelLoader/KernelLoader.h"
@@ -17,7 +17,7 @@
 // using json = nlohmann::json;
 int main() {
     fs::path path = fs::current_path()/"logs"/"SystemAgent.json";
-    IBuilder* bd = new Builder(path);
+    ISerializer* bd = new Serializer(path);
     // IAgent* agent = new SystemAgent(bd);
     // // agent->SetUrl("help.iwantmyname.com");
     // agent->update();

@@ -3,10 +3,10 @@
 #include "../IAgent.h"
 #include "../InfoAgent.h"
 
-class IBuilder;
+class ISerializer;
 class NetworkAgent : public IAgent {
  public:
-    NetworkAgent(IBuilder* bd);
+    NetworkAgent(ISerializer* bd);
     void update() override final;
     [[nodiscard]] std::string toStdString() override final;
     [[nodiscard]] bool SetUrl(std::string_view) override final;

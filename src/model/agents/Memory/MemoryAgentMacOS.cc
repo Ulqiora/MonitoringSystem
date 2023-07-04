@@ -10,10 +10,10 @@
 #include <string>
 #include <sstream>
 
-#include "../../AgentReportF/Builder.h"
+#include "../../AgentReportF/Serializer.h"
 #include "MemoryAgent.h"
 
-MemoryAgent::MemoryAgent(IBuilder* bd)
+MemoryAgent::MemoryAgent(ISerializer* bd)
     : info_(bd->getAgentInfo()), report_(bd->getResult()), iter_(report_) {
     info_ = bd->getAgentInfo();
     report_ = bd->getResult();

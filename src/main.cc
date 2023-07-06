@@ -10,7 +10,7 @@
 #include "model/AgentReportF/Serializer.h"
 #include "model/AgentReportF/ReportComponent.h"
 // #include "model/Agents/CPU/CpuAgent.h"
-// #include "model/KernelLoader/KernelLoader.h"
+#include "model/KernelLoader/KernelLoaderLibs.h"
 // #include "model/Agents/Memory/MemoryAgent.h"
 // #include "model/Agents/Network/NetworkAgent.h"
 // #include "model/Agents/System/SystemAgent.h"
@@ -18,6 +18,8 @@
 int main() {
     fs::path path = fs::current_path()/"logs"/"SystemAgent.json";
     ISerializer* bd = new Serializer(path);
+    IKernelLoader* ikl = new KernelLoaderLibs(fs::current_path());
+    ikl->start();
     // IAgent* agent = new SystemAgent(bd);
     // // agent->SetUrl("help.iwantmyname.com");
     // agent->update();

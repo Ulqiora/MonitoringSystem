@@ -1,8 +1,5 @@
 #pragma once
-#include <chrono>
 #include <filesystem>
-#include <vector>
-
 namespace fs=std::filesystem;
 class IKernelLoader {
    public:
@@ -12,6 +9,6 @@ class IKernelLoader {
     }
     virtual void start() = 0;
 
-   private:
+   protected:
     fs::path checkedFolder_;
 };

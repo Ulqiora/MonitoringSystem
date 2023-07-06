@@ -94,7 +94,10 @@
         "stack": "cpp",
         "unordered_set": "cpp",
         "valarray": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "cfenv": "cpp",
+        "typeindex": "cpp"
     },
-    "cmake.sourceDirectory": "D:/GitHub/MonitoringSystem/src"
+    "cmake.sourceDirectory": "/mnt/d/GitHub/MonitoringSystem/src",
+    "C_Cpp.errorSquiggles": "disabled"
 }

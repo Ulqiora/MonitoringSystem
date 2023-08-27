@@ -1,71 +1,20 @@
-// #include <fstream>
-// #include <iostream>
-// #include <string>
-#include <thread>
-// #include <vector>
-// #include <thread>
-// #include <filesystem>
-// #include <sys/vfs.h>
-#include "libs/json/single_include/nlohmann/json.hpp"
-#include "model/AgentReportF/Serializer.h"
-#include "model/AgentReportF/ReportComponent.h"
-// #include "model/Agents/CPU/CpuAgent.h"
-#include "model/KernelLoader/KernelLoaderLibs.h"
-// #include "model/Agents/Memory/MemoryAgent.h"
-// #include "model/Agents/Network/NetworkAgent.h"
-// #include "model/Agents/System/SystemAgent.h"
-// using json = nlohmann::json;
-int main() {
-    fs::path path = fs::current_path()/"logs"/"SystemAgent.json";
-    ISerializer* bd = new Serializer(path);
-    IKernelLoader* ikl = new KernelLoaderLibs(fs::current_path());
-    ikl->start();
-    // IAgent* agent = new SystemAgent(bd);
-    // // agent->SetUrl("help.iwantmyname.com");
-    // agent->update();
-    // std::cout<<agent->toStdString()<<'\n';
-    // // agent->SetUrl("help.iwantmynae.com");
-    // std::this_thread::sleep_for(std::chrono::seconds(30));
-    // agent->update();
-    // std::cout<<agent->toStdString()<<'\n';
+#include <boost/dll/import.hpp> // for import_alias
+#include <iostream>
+#include "DLL/IAgentAPI.h"
 
-    // std::string command = "ping -c 1 " "help.iwantmyname.com"  " >/dev/null";
-    // std::string output = "";
-    // char buffer[128] = "";
-    // FILE* pipe = popen(command.c_str(), "r");
-    // if (!pipe) {
-    //     throw std::runtime_error("popen() failed!");
-    // }
-    // if (std::feof(pipe)) {
-    //     // return;
-    // }
-    // while (!std::feof(pipe)) {
-    //     if (std::fgets(buffer, 128, pipe) != NULL)
-    //         output += buffer;
-    // }
-    // pclose(pipe);
-    // char* point;
-    // double value = strtod(buffer,&point);
-    // std::cout<<value;
-    // std::string command = "ping -c 1 help.iwantmyname.com ";
-    
-    // // Выполняем команду в дочернем процессе и открываем канал для чтения вывода
-    // FILE* pipe = popen(command.c_str(), "r");
-    // if (!pipe) {
-    //     std::cerr << "Ошибка выполнения команды";
-    //     return 1;
-    // }
-    
-    // // Читаем вывод команды построчно и сохраняем его в переменную output
-    // std::array<char, 128> buffer;
-    // std::string output;
-    // while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
-    //     output += buffer.data();
-    // }
-    
-    // // Закрываем канал и выводим полученный вывод команды
-    // pclose(pipe);
-    // std::cout << output;
-    
-    // return 0;
+namespace dll = boost::dll;
+
+int main(int argc, char* argv[]) {
+
+    boost::dll::fs::path lib_path(argv[1]);             // argv[1] contains path to directory with our plugin library
+    boost::shared_ptr<IAgentAPI> plugin;            // variable to hold a pointer to plugin variable
+    std::cout << "Loading the plugin" << std::endl;
+
+    plugin = dll::import_symbol<IAgentAPI>(          // type of imported symbol is located between `<` and `>`
+        lib_path / "AgentCPU",                     // path to the library and library name
+        "plugin",                                       // name of the symbol to import
+        dll::load_mode::append_decorations              // makes `libmy_plugin_sum.so` or `my_plugin_sum.dll` from `my_plugin_sum`
+    );
+
+    // std::cout << "plugin->calculate(1.5, 1.5) call:  " << plugin->calculate(1.5, 1.5) << std::endl;
 }

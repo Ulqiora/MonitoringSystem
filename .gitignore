@@ -1,3 +1,5 @@
 *.o
 build/*
 src/libs
+.vscode
+agents

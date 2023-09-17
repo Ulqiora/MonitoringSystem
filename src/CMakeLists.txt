@@ -2,7 +2,9 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 set(SOURCE_EXE main.cc)
 add_executable(myapp ${SOURCE_EXE})	# Создает исполняемый файл с именем main
 set (CMAKE_CXX_STANDARD 17)
-target_include_directories(myapp PRIVATE ${Boost_INCLUDE_DIRS})
+target_include_directories(myapp
+        PRIVATE
+        ${Boost_INCLUDE_DIRS})
 target_link_libraries(myapp PRIVATE
-    ${Boost_LIBRARIES} )
+    ${Boost_LIBRARIES} DynamicLibraryLoader)
 add_subdirectory(DLL)

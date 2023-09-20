@@ -4,7 +4,7 @@
 #include "DLL/IAgentAPI.h"
 #include <boost/function.hpp>
 namespace dll = boost::dll;
-#include <DynLibsLoader.h>
+#include <DynamicLibraryLoader.h>
 int main(int argc, char* argv[]) {
 //    try {
 //        using namespace Agent;

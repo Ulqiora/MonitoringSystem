@@ -6,5 +6,9 @@ target_include_directories(myapp
         PRIVATE
         ${Boost_INCLUDE_DIRS})
 target_link_libraries(myapp PRIVATE
-    ${Boost_LIBRARIES} DynamicLibraryLoader)
+    ${Boost_LIBRARIES}
+    DynamicLibraryLoader
+        MonitoringBot
+)
 add_subdirectory(DLL)
+add_subdirectory(MonitoringBot)

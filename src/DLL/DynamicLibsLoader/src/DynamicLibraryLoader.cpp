@@ -12,7 +12,7 @@ namespace Agent {
                             [&entry](const LibraryInfo &info) {
                                 return info.libraryPath_ == entry.path();
                             }
-        ) == libraries_.cend();
+        ) != libraries_.cend();
     }
 
     void DynamicLoaderLibrary::setLibraryDirectory(const std::filesystem::path &path) {
@@ -21,16 +21,18 @@ namespace Agent {
     }
     void DynamicLoaderLibrary::setConfigDirectory(const std::filesystem::path &path) {
         if(std::filesystem::exists(path))
-            workingLibraryDirectory_=path;
+            workingConfigDirectory_=path;
     }
 
     void DynamicLoaderLibrary::start() {
         while(isActivated){
             for(const auto& entry : std::filesystem::directory_iterator(workingLibraryDirectory_)){
-                if(isDownloaded(entry)){
+                if(isNeedToUpdate(entry)){
+                    updateLibrary(entry);
+                }
+                if(!isDownloaded(entry)){
                     downloadLibrary(entry);
                 }
-
             }
         }
     }
@@ -47,15 +49,39 @@ namespace Agent {
                 "create_plugin",                                                // symbol to import
                 dll::load_mode::append_decorations                              // do append extensions and prefixes
         );
-        auto config = workingConfigDirectory_.string() + entry.path().stem().string() + ".json";
+        auto config = (workingConfigDirectory_ / entry.path().stem()).string() + ".json";
         libraries_.emplace_back(
                 LibraryInfo{
                         entry.path().stem().string(),
                         config,
                         entry.path(),
-                        creator(config)
+                        creator(config),
+                        last_write_time(entry.path())
                 }
         );
     }
 
+    bool DynamicLoaderLibrary::isNeedToUpdate(const std::filesystem::directory_entry &entry) const noexcept {
+        return std::find_if(libraries_.cbegin(),
+                            libraries_.cend(),
+                            [&entry](const LibraryInfo& lib){
+            return  std::filesystem::exists(lib.libraryPath_) &&
+                    entry.last_write_time() != lib.timeLastEdited;
+        }) == libraries_.cend();
+    }
+
+    void DynamicLoaderLibrary::updateLibrary(const std::filesystem::directory_entry &entry) {
+        auto library = std::find_if(libraries_.begin(),
+                                    libraries_.end(),
+                                    [&entry](const LibraryInfo& lib){
+                                        return  std::filesystem::exists(lib.libraryPath_) &&
+                                                entry.last_write_time() != lib.timeLastEdited;
+                                    });
+        libraries_.erase(library);
+        downloadLibrary(entry);
+    }
+
+    DynamicLoaderLibrary::DynamicLoaderLibrary(std::mutex & mutex) :mutex_(mutex) {
+
+    }
 }

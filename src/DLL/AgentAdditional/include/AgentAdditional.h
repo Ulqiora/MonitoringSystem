@@ -8,19 +8,18 @@
 
 //#include
 namespace Agent {
-class AgentCPU : public IAgentAPI {
+class AgentAdditional : public IAgentAPI {
     void setFileSettings(const std::string& );
     void createReportFormatByFile();
     void updateGpuLoadedInfo();
     void updateProcessNumber();
 public:
-    AgentCPU();
-    explicit AgentCPU(const std::filesystem::path&);
+    AgentAdditional();
+    explicit AgentAdditional(const std::filesystem::path&);
     [[nodiscard]] std::string name() const override;
     boost::property_tree::ptree report() final {return report_;}
-    ~AgentCPU() override = default;
+    ~AgentAdditional() override = default;
     static std::shared_ptr<IAgentAPI> create(const std::string&);
-    virtual std::chrono::seconds getInterval(){return timeReload_;}
     void updateInfo() override ;
 private:
     std::string fileSettings_ = "AgentCPU.json";

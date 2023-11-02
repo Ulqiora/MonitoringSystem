@@ -11,6 +11,8 @@ namespace Agent {
 
         virtual boost::property_tree::ptree report() = 0;
 
+        virtual std::chrono::seconds getInterval() = 0;
+
         virtual void updateInfo() = 0;
 
 //   virtual void setFileSettings(const std::string&) = 0;

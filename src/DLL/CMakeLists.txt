@@ -1,6 +1,7 @@
 
 add_subdirectory(DynamicLibsLoader)
 add_subdirectory(AgentCPU)
+#add_subdirectory(AgentAdditional)
 add_subdirectory(PrinterAgentInfo)
 target_include_directories(
         DynamicLibraryLoader

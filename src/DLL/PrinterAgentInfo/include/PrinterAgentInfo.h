@@ -6,14 +6,18 @@
 namespace Agent{
 class PrinterAgentInfo{
 public:
-    void generateFilename();
-    explicit PrinterAgentInfo(std::list<std::shared_ptr<IAgentAPI>>& libraries);
-    void start();
+
+    explicit PrinterAgentInfo(std::list<std::shared_ptr<IAgentAPI>>& libraries,std::mutex& mutex);
+
+    [[noreturn]] void start();
     void setFolderForLogfiles(const std::filesystem::directory_entry&);
 private:
+    void generateFilename();
+    static void updateYmd(std::chrono::year_month_day& ymd);
+private:
+    std::mutex& mutex_;
     std::list<std::shared_ptr<IAgentAPI>>& libraries_;
-
-    std::chrono::time_point<std::chrono::system_clock> time_;
+    std::chrono::year_month_day time_{};
     std::filesystem::path LogDirectory;
     std::string filepath_;
 };
